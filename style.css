@@ -1,0 +1,368 @@
+/* ============================================
+   1) VARIABLES DE COLOR
+   Guardamos los colores en "cajitas" con nombre.
+   Para el modo oscuro solo cambiamos estas cajitas
+   y toda la página cambia de color sola.
+   ============================================ */
+:root {
+  --fondo: #eafbd7;
+  --texto: #2b2b1f;
+  --panel: #ffffff;
+  --borde: #3a2a1a;
+  --verde-pasto: #6fb43a;
+  --verde-pasto-oscuro: #4f8a27;
+  --tierra: #8a5a2b;
+  --tierra-oscura: #5f3d1c;
+  --acento: #f7ff63;
+  --acento2: #f2c14e;
+  --sombra: rgba(0, 0, 0, 0.25);
+}
+
+/* Modo oscuro: se activa cuando el body tiene la clase "oscuro" */
+body.oscuro {
+  --fondo: #16210f;
+  --texto: #eafbd7;
+  --panel: #223417;
+  --borde: #0e1509;
+  --verde-pasto: #3d6b21;
+  --verde-pasto-oscuro: #294a15;
+  --tierra: #4a3216;
+  --tierra-oscura: #2d1e0d;
+  --acento: #7ed957;
+  --acento2: #ffd166;
+  --sombra: rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================
+   2) ESTILOS GENERALES
+   ============================================ */
+* { box-sizing: border-box; }
+
+/* Dos fuentes en la página:
+   - 'Press Start 2P' = letra pixelada, solo para títulos y botones
+   - 'Nunito' = letra normal y redondeada, para todo lo que se lee
+     seguido  */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 18px;
+  background: var(--fondo);
+  color: var(--texto);
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Letra pixelada: solo para títulos, etiquetas y botones */
+h1, h2, h3, .titulo-pixel, .tarjeta-cabecera, nav a, .boton-pixel, .etiqueta {
+  font-family: 'Press Start 2P', cursive;
+  line-height: 1.6;
+}
+
+/* Letra normal: para todo el texto que se lee seguido */
+p, li, label, input, textarea, .tarjeta-contenido {
+  font-family: 'Nunito', sans-serif;
+}
+
+img { image-rendering: pixelated; }
+
+.caja {
+  background: var(--panel);
+  border: 4px solid var(--borde);
+  border-radius: 6px;
+  box-shadow: 6px 6px 0 var(--sombra);
+  padding: 20px;
+}
+
+.boton-pixel {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 12px 18px;
+  background: var(--acento);
+  color: #fff;
+  border: 3px solid var(--borde);
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--sombra);
+}
+.boton-pixel:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--sombra); }
+.boton-pixel:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--sombra); }
+
+.contenedor {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ============================================
+   3) FRANJA CON TEXTURA DE BLOQUE DE CÉSPED
+   Va pegada arriba de todo, antes del nav.
+   ============================================ */
+.franja-cesped {
+  height: 40px;
+  width: 100%;
+  background-image:
+    repeating-linear-gradient(90deg, var(--verde-pasto) 0 10px, var(--verde-pasto-oscuro) 10px 20px),
+    repeating-linear-gradient(0deg, transparent 0 10px, rgba(0, 0, 0, 0.08) 10px 20px);
+}
+
+.franja-tierra {
+  height: 12px;
+  width: 100%;
+  background-image:
+    repeating-linear-gradient(90deg, var(--tierra) 0 10px, var(--tierra-oscura) 10px 20px);
+}
+
+/* ============================================
+   4) NAV
+   ============================================ */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  background: var(--verde-pasto-oscuro);
+  padding: 14px;
+  border-bottom: 4px solid var(--borde);
+}
+
+nav a {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 11px;
+  color: #fff;
+  text-decoration: none;
+  background: var(--verde-pasto);
+  padding: 10px 14px;
+  border: 2px solid var(--borde);
+  border-radius: 4px;
+}
+nav a:hover { background: var(--acento2); color: #2b2b1f; }
+
+#boton-modo { margin-left: auto; }
+
+/* ============================================
+   5) ENCABEZADO
+   ============================================ */
+header.hero {
+  text-align: center;
+  padding: 90px 20px;
+  background:
+    linear-gradient(rgba(198, 241, 205, 0.944), rgba(0, 0, 0, 0.45)),
+    repeating-linear-gradient(45deg, var(--verde-pasto) 0 24px, var(--verde-pasto-oscuro) 24px 48px);
+  border-bottom: 6px solid var(--borde);
+  color: #fff;
+}
+
+header.hero .etiqueta {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  background: var(--acento2);
+  color: #2b2b1f;
+  display: inline-block;
+  padding: 6px 12px;
+  border: 2px solid var(--borde);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+header.hero h1 {
+  font-size: 34px;
+  margin: 0 0 16px;
+  text-shadow: 4px 4px 0 var(--sombra);
+}
+
+header.hero p {
+  font-size: 24px;
+  max-width: 650px;
+  margin: 0 auto 30px;
+}
+
+header.hero .botones-hero {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+header.hero .boton-secundario {
+  background: transparent;
+  border: 3px solid #fff;
+}
+
+/* ============================================
+   6) SECCIONES
+   ============================================ */
+section { padding: 50px 0; }
+
+section h2 {
+  text-align: center;
+  font-size: 20px;
+  color: var(--acento);
+  margin-bottom: 30px;
+}
+
+/* ---- Carrusel  ---- */
+.carrusel {
+  position: relative;
+  max-width: 950px;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 4px solid var(--borde);
+  border-radius: 6px;
+  box-shadow: 6px 6px 0 var(--sombra);
+}
+
+.carrusel-pista {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.carrusel-item {
+  min-width: 100%;
+  background: var(--panel);
+  text-align: center;
+}
+
+.carrusel-item img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 4px solid var(--borde);
+}
+
+.carrusel-item .carrusel-texto {
+  padding: 24px;
+}
+
+.carrusel-item h3 { margin: 0 0 8px; font-size: 15px; }
+.carrusel-item p { font-size: 20px; }
+
+.carrusel-controles {
+  display: flex;
+  justify-content: space-between;
+  max-width: 950px;
+  margin: 12px auto 0;
+}
+
+
+
+/* ---- Buscador ---- */
+.buscador {
+  max-width: 500px;
+  margin: 0 auto 30px;
+  display: flex;
+  gap: 10px;
+}
+.buscador input {
+  flex: 1;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 10px;
+  border: 3px solid var(--borde);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--texto);
+}
+
+/* ---- Tarjetas desplegables ---- */
+.grid-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tarjeta { cursor: pointer; }
+
+.tarjeta-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+}
+
+.tarjeta-contenido {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  font-size: 20px;
+  margin-top: 0;
+}
+
+.tarjeta.abierta .tarjeta-contenido {
+  max-height: 300px;
+  margin-top: 12px;
+}
+
+.tarjeta .flecha { transition: transform 0.3s ease; }
+.tarjeta.abierta .flecha { transform: rotate(180deg); }
+
+/* ---- Dato curioso ---- */
+.dato-curioso { max-width: 600px; margin: 0 auto; text-align: center; }
+#texto-dato {
+  font-size: 24px;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Multimedia ---- */
+.multimedia {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 950px;
+  margin: 0 auto;
+}
+.multimedia iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 4px solid var(--borde);
+  border-radius: 6px;
+}
+
+/* ---- Imagen pixel art dibujada con divs ---- */
+.creeper-pixel-art {
+  display: grid;
+  grid-template-columns: repeat(8, 20px);
+  grid-template-rows: repeat(8, 20px);
+  margin: 0 auto;
+  width: fit-content;
+  border: 4px solid var(--borde);
+  box-shadow: 6px 6px 0 var(--sombra);
+}
+.creeper-pixel-art div { width: 20px; height: 20px; }
+
+/* ---- Formulario de contacto ---- */
+.formulario {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.formulario label { font-size: 18px; }
+.formulario input, .formulario textarea {
+  width: 100%;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 10px;
+  border: 3px solid var(--borde);
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--texto);
+}
+
+#mensaje-envio { text-align: center; font-size: 20px; margin-top: 10px; }
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  background: var(--verde-pasto-oscuro);
+  color: #fff;
+}
